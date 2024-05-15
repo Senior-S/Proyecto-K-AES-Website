@@ -28,7 +28,7 @@ const FormSchema = z.object({
 
 const base64regex = /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
 
-export async function checkAESKey(prevState: FormState, formData: FormData){
+export async function checkAESKey(prevState: any /* Funky solution due otherwise typescript cries about it */, formData: FormData){
     const validateFields = FormSchema.safeParse({
         text: formData.get('encryptedText'),
         key: formData.get('key')

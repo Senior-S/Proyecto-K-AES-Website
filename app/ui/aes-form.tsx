@@ -4,7 +4,7 @@ import { useFormState } from "react-dom";
 import { checkAESKey } from "@/app/lib/actions";
 
 export default function AesForm() {
-    const prevState = { message: null, errors: {} };
+    const prevState = { errors: {}, message: '' };
     const [state, action] = useFormState(checkAESKey, prevState);
 
     return (
@@ -26,7 +26,7 @@ export default function AesForm() {
                     <div id="text-error" aria-live="polite" aria-atomic="true" className="flex justify-center">
                         {state?.errors?.text &&
                             state.errors?.text?.map((error: string) => (
-                                <p className="mt-1 max-w-48 text-sm text-red-500">
+                                <p className="mt-1 max-w-48 text-sm text-red-500" key={error}>
                                     {error}
                                 </p>
                             ))}
@@ -47,7 +47,7 @@ export default function AesForm() {
                     <div id="key-error" aria-live="polite" aria-atomic="true" className="flex justify-center">
                         {state?.errors?.key &&
                             state.errors.key.map((error: string) => (
-                                <p className="mt-1 max-w-48 text-sm text-red-500">
+                                <p className="mt-1 max-w-48 text-sm text-red-500" key={error}>
                                     {error}
                                 </p>
                             ))}
