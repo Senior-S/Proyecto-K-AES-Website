@@ -4,13 +4,13 @@ import { useFormState } from "react-dom";
 import { checkAESKey } from "@/app/lib/actions";
 
 export default function AesForm() {
-    const prevState = { errors: {}, message: '' };
+    const prevState = { errors: {}, message: null };
     const [state, action] = useFormState(checkAESKey, prevState);
 
     return (
         <form action={action}>
             <div className="text-center">
-                <div className="mb-4">
+                <div className="mb-2">
                     <label htmlFor="text" className="block font-semibold">
                         Texto encriptado
                     </label>
@@ -26,13 +26,13 @@ export default function AesForm() {
                     <div id="text-error" aria-live="polite" aria-atomic="true" className="flex justify-center">
                         {state?.errors?.text &&
                             state.errors?.text?.map((error: string) => (
-                                <p className="mt-1 max-w-48 text-sm text-red-500" key={error}>
+                                <p className="max-w-48 text-sm text-red-500" key={error}>
                                     {error}
                                 </p>
                             ))}
                     </div>
                 </div>
-                <div className="mb-4">
+                <div className="mb-2">
                     <label htmlFor="key" className="block font-semibold">
                         Clave secreta
                     </label>
@@ -47,24 +47,25 @@ export default function AesForm() {
                     <div id="key-error" aria-live="polite" aria-atomic="true" className="flex justify-center">
                         {state?.errors?.key &&
                             state.errors.key.map((error: string) => (
-                                <p className="mt-1 max-w-48 text-sm text-red-500" key={error}>
+                                <p className="max-w-48 text-sm text-red-500" key={error}>
                                     {error}
                                 </p>
-                            ))}
+                            ))
+                        }
                     </div>
-
                 </div>
             </div>
-            <div className="flex justify-center">
+            <div className="mb-2 flex justify-center">
                 <button type="submit" className="rounded-lg p-2 h-10 bg-[#EEEEEE] text-black">Probar clave</button>
             </div>
             {state?.message &&
-                <div className="bg-[#31363F] border border-[#EEEEEE] w-full rounded-lg py-2 mt-4">
-                    <p className="text-center mt-1 text-sm text-red-500 font-bold">
+                <div aria-live="polite" aria-atomic="true" className="flex justify-center text-center bg-[#31363F] border border-[#EEEEEE] w-full rounded-lg">
+                    <p className="max-w-48 text-sm text-red-500">
                         {state.message}
                     </p>
                 </div>
             }
+
         </form>
     )
 }

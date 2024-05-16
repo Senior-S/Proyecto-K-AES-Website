@@ -1,5 +1,5 @@
 import { unstable_cache as cache, unstable_noStore as noStore } from 'next/cache';
-import postgres, { PostgresError } from 'postgres'
+import postgres from 'postgres'
 
 const ITEMS_PER_PAGE = 15;
 
@@ -42,12 +42,12 @@ export async function saveEcbIntent(
             INSERT INTO ecb_data (key, base64, result)
             VALUES (${key}, ${base64 ?? 'La key no es base64.'}, ${result ?? 'Key invalida.'});
         `;
-    } catch (error) {
-        if(error instanceof PostgresError && error.code === '23505') {
+    } catch (error) {  
+        if(error instanceof postgres.PostgresError && error.code === '23505') {
             return false;
         }
         console.error(error);
-        throw new Error('Failed to save ech intent');
+        throw new Error('Failed to save ecb intent');
     } finally {
         await sql.end();
     }

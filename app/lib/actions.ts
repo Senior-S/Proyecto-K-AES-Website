@@ -37,7 +37,7 @@ export async function checkAESKey(prevState: any /* Funky solution due otherwise
     if(!validateFields.success){
         return {
             errors: validateFields.error.flatten().fieldErrors,
-            message: 'Missing Fields. Failed to check AES key.',
+            message: null
         };
     }
 
